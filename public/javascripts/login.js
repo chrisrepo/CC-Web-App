@@ -83,7 +83,7 @@ function signUp(event) {
 
     var inputCount = 0;
     $('#inputDiv input').each(function(index, val) {
-        if($(this).val() === '') { inputCount++; }
+        inputCount++;
     });
 
     if (inputCount > 2) {
@@ -94,5 +94,20 @@ function signUp(event) {
             if(removeCount > 2){ $(this).remove(); }
         });
         $("#signIn").text("Sign In");
+    } else if (inputCount == 2){
+        //use ajax to check sign in
+        var url = 'http://localhost:3001/userlist/checkLoginCredentials/'+$('#user').val()+'/'+$('#pass').val();
+        $.get( url, function( data ) {
+            if (data.isLoginValid === 'true') {
+                window.location.replace("http://localhost:3000/home");
+            }
+            else {
+
+                // If something goes wrong, alert the error message that our service returned
+                alert('Error: invalid login credentials');
+
+            }
+        });
+        
     }
 }
