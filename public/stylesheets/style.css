@@ -11,12 +11,19 @@ a {
   color: #00B7FF;
 }
 /*Override Bootstrap*/
-.input-group .form-control:first-child{
-  border-radius: 5px 5px 0px 0px;
-  border-color: grey;
-  border-width: 2px;
+
+.input-group-lg .form-control:first-child{
+  	border-radius: 5px 5px 0px 0px;
+  	border-color: grey;
+  	border-width: 2px;
 }
-.input-group .form-control:not(:first-child):not(:last-child) {
+.input-group-lg .form-control:not(:first-child):not(:last-child) {
+	border-radius: 0px;
+	border-color: grey;
+  	border-width: 2px;
+  	border-top-width: 0px;
+}
+.input-group-lg .form-control:last-child {
 	border-radius: 0px 0px 5px 5px;
 	margin-bottom: 20px;
 	border-color: grey;
@@ -26,7 +33,17 @@ a {
 /*End Override Bootstrap*/
 
 /*Custom CSS (No override)*/
+.centerfy {
+	text-align: center;
+}
+#formHolder {
+	margin-left: 20%;
+	margin-right: 20%;
+}
 
+#signUp {
+	margin-left: 50px;
+}
 #wrapper {
 	padding-left:312px;
 	position:relative;

@@ -9,14 +9,16 @@ html
         script(src='/javascripts/login.js')
     body
         block content
-            h1 Campus Connect
+            h1.centerfy Campus Connect
             .container#container
                 //form.form-signin(action="/login", method="post")
-                h2.form-signin-heading Please sign in
-                div.input-group.input-group-lg#inputDiv
-                    input.form-control.inputField(id="user", type="text", name="username", placeholder="Username")
-                    input.form-control.inputField(id="pass", type="text", name="pass", placeholder="Password")
-                    button.btn.btn-large.btn-primary(id="signIn") Sign in
-                    button.btn.btn-large.btn-primary.pull-right(id="signUp") Sign Up
-                label.checkbox.
-                    <input type="checkbox" value="remember-me" /> Remember me
+                h2.form-signin-heading.centerfy Please sign in
+                div#formHolder
+                    div.input-group-lg#inputDiv
+                        input.form-control.inputField(id="user", type="text", name="username", placeholder="Username: johndoe123")
+                        input.form-control.inputField(id="pass", type="text", name="pass", placeholder="Password: abcd123!$*")
+                    div#buttonDiv
+                        button.btn.btn-large.btn-primary(id="signIn") Sign in
+                        button.btn.btn-large.btn-primary(id="signUp") Sign Up
+                    label.checkbox.
+                        <input type="checkbox" value="remember-me" /> Remember me
