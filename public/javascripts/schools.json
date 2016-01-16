@@ -1,0 +1,6 @@
+{ "schools": 
+	[
+	{"school":{"name": "California State University, Long Beach", "code":"CSULB"}},
+	{"school":{"name": "Loyola Marymount University", "code":"LMULA"}}
+	]
+}

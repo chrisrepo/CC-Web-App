@@ -4,6 +4,36 @@ var userListData = [];
 
 // DOM Ready =============================================================
 $(document).ready(function() {
+    var schools = new Bloodhound({
+        datumTokenizer: function(data){
+            return Bloodhound.tokenizers.whitespace(data.schools);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: 'http://localhost:3000/javascripts/schools.json',
+        remote: {
+            url: 'http://localhost:3000/javascripts/schools.json',
+            filter: function(response) {      
+                return response.schools;
+            }
+        }
+    });
+
+    schools.initialize();
+
+    $('#school').typeahead(null, {
+        name: 'schools',
+        displayKey: function(schools){
+            if (schools._query) {
+                if (schools.school.name.toLowerCase().includes(schools._query.toLowerCase())){
+                    return schools.school.name;
+                }
+            } else {
+                return schools.school.name
+            }
+        },
+        source: schools.ttAdapter()
+    });
+
     // Add User button click
     $('#signUp').on('click', addSignUpInput);
     // Sign In (also back button if signing up)
@@ -111,3 +141,5 @@ function signUp(event) {
         
     }
 }
+
+

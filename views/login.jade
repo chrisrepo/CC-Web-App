@@ -2,11 +2,13 @@ doctype html
 html
   head
         meta(name='viewport', content='width=device-width, initial-scale=1')
-        title= title
+        title= 'Campus Connect'
         link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-        link(rel='stylesheet', href='/stylesheets/style.css')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+        script(src='/javascripts/typeahead.jquery.js')
+        script(src='/javascripts/bloodhound.js')
         script(src='/javascripts/login.js')
+        link(rel='stylesheet', href='/stylesheets/style.css')
     body
         block content
             h1.centerfy Campus Connect
@@ -17,6 +19,8 @@ html
                     div.input-group-lg#inputDiv
                         input.form-control.inputField(id="user", type="text", name="username", placeholder="Username: johndoe123")
                         input.form-control.inputField(id="pass", type="text", name="pass", placeholder="Password: abcd123!$*")
+                    div.input-group-lg#schoolInput
+                        input.form-control.inputField.typeahead(id="school", type="text", name="school",autocomplete="off", placeholder="School: California State University, Long Beach - CSULB")
                     div#buttonDiv
                         button.btn.btn-large.btn-primary(id="signIn") Sign in
                         button.btn.btn-large.btn-primary(id="signUp") Sign Up
