@@ -50,10 +50,10 @@ function addSignUpInput(event){
         inputCount++;
     });
     //add email input if only user and pass are showing
-    if (inputCount == 2) {
-        $("#inputDiv").append("<input class='form-control inputField' id='email' name='email' type='text' placeholder='Email Address: example@gmail.com'/>");  
+    if (inputCount == 4) {
+        $("#pass").after("<input class='form-control inputField' id='email' name='email' type='text' placeholder='Email Address: example@gmail.com'/>");  
         $("#signIn").text("Back");
-    } else if (inputCount == 3) {
+    } else if (inputCount == 5) {
         //try to add the user
         addUser();
     } 
@@ -75,7 +75,8 @@ function addUser() {
         var newUser = {
             'username': $('#user').val(),
             'password': $('#pass').val(),
-            'email': $('#email').val()
+            'email': $('#email').val(),
+            'school': $('#school').val()
         }
 
         // Use AJAX to post the object to our adduser service
@@ -116,15 +117,11 @@ function signUp(event) {
         inputCount++;
     });
 
-    if (inputCount > 2) {
+    if (inputCount > 4) {
         //this button is acting as a back button to go to "orignal sign in template"
-        var removeCount = 0;
-        $('#inputDiv input').each(function(index, val) {
-            if($(this).val() === '') { removeCount++; }
-            if(removeCount > 2){ $(this).remove(); }
-        });
+        $('#email').remove();
         $("#signIn").text("Sign In");
-    } else if (inputCount == 2){
+    } else if (inputCount == 4){
         //use ajax to check sign in
         var url = 'http://localhost:3001/userlist/checkLoginCredentials/'+$('#user').val()+'/'+$('#pass').val();
         $.get( url, function( data ) {

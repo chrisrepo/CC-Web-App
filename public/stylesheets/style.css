@@ -11,23 +11,22 @@ a {
   color: #00B7FF;
 }
 /*Override Bootstrap*/
-.form-control.inputField.typeahead.tt-hint {
-	padding: 6px 12px;
-	height: 50px;
-}
-
 #school:placeholder-shown{
-	font-size: 15px;
+	font-size: 18px;
 }
 .twitter-typeahead {
 	width: 100%;
-	margin-bottom: 10px;
 }
 #school{
-	border-radius: 5px 5px 5px 5px;
   	border-color: grey;
   	border-width: 2px;
-  	height: 50px;
+  	border-top-width: 0px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+  	height: 46px;
+  	border-radius: 0px 0px 5px 5px;
+  	margin-bottom: 10px;
 }
 
 .input-group-lg .form-control:first-child{
