@@ -4,35 +4,15 @@ var userListData = [];
 
 // DOM Ready =============================================================
 $(document).ready(function() {
-    var schools = new Bloodhound({
-        datumTokenizer: function(data){
-            return Bloodhound.tokenizers.whitespace(data.schools);
-        },
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: 'http://localhost:3000/javascripts/schools.json',
-        remote: {
-            url: 'http://localhost:3000/javascripts/schools.json',
-            filter: function(response) {      
-                return response.schools;
-            }
+    $.getJSON('http://localhost:3000/json/SchoolList.json', function(data){
+        htmlFormattedString = '<option>Select School</option>';
+        for (i = 0; i < data.length; i++) {
+            htmlFormattedString = htmlFormattedString + '<option>'+data[i].name + ' - '+ data[i].code+'</option>';
         }
+        $('#school').append(htmlFormattedString);
     });
+    
 
-    schools.initialize();
-
-    $('#school').typeahead(null, {
-        name: 'schools',
-        displayKey: function(schools){
-            if (schools._query) {
-                if (schools.school.name.toLowerCase().includes(schools._query.toLowerCase())){
-                    return schools.school.name;
-                }
-            } else {
-                return schools.school.name
-            }
-        },
-        source: schools.ttAdapter()
-    });
 
     // Add User button click
     $('#signUp').on('click', addSignUpInput);
@@ -42,6 +22,10 @@ $(document).ready(function() {
 
 // Functions =============================================================
 
+function toggleDropdown(event){
+    $('.dropdown-toggle').dropdown();
+}
+
 // Add Sign Up Fields
 function addSignUpInput(event){
     event.preventDefault();
@@ -50,10 +34,10 @@ function addSignUpInput(event){
         inputCount++;
     });
     //add email input if only user and pass are showing
-    if (inputCount == 4) {
-        $("#pass").after("<input class='form-control inputField' id='email' name='email' type='text' placeholder='Email Address: example@gmail.com'/>");  
+    if (inputCount == 2) {
+        $("#pass").after("<input class='form-control inputField' id='email' name='email' type='text' placeholder='Student Email Address: example@school.edu'/>");  
         $("#signIn").text("Back");
-    } else if (inputCount == 5) {
+    } else if (inputCount == 3) {
         //try to add the user
         addUser();
     } 
@@ -67,6 +51,9 @@ function addUser() {
     $('#inputDiv input').each(function(index, val) {
         if($(this).val() === '') { errorCount++; }
     });
+    if ($('#school').val() === 'Select School') {
+        errorCount++;
+    }
 
     // Check and make sure errorCount's still at zero
     if(errorCount === 0) {
@@ -76,7 +63,7 @@ function addUser() {
             'username': $('#user').val(),
             'password': $('#pass').val(),
             'email': $('#email').val(),
-            'school': $('#school').val()
+            'school': $('#school').val().split(" - ")[1]
         }
 
         // Use AJAX to post the object to our adduser service
@@ -117,11 +104,11 @@ function signUp(event) {
         inputCount++;
     });
 
-    if (inputCount > 4) {
+    if (inputCount > 2) {
         //this button is acting as a back button to go to "orignal sign in template"
         $('#email').remove();
         $("#signIn").text("Sign In");
-    } else if (inputCount == 4){
+    } else if (inputCount == 2){
         //use ajax to check sign in
         var url = 'http://localhost:3001/userlist/checkLoginCredentials/'+$('#user').val()+'/'+$('#pass').val();
         $.get( url, function( data ) {
